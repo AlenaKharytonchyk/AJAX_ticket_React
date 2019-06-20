@@ -43,6 +43,7 @@ class MyAPIComponent extends Component {
             this.setState({ current: current + offset});
     }
     onPrevClick() {
+        const { current, offset, total } = this.state;
         if(current + offset > total)
             this.setState({ current: current - offset});
     }
@@ -61,12 +62,6 @@ class MyAPIComponent extends Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <React.Fragment>
-                <SearchHeader onSearch={() => this.fetchData()}  onDropdownChange onInputChange={e => this.onSearchInputChange(e)}/>  
-                {/* Option 2 <SearchHeader onSearch={() => this.fetchData()}  onDropdownChange onInputChange={onSearchInputChange}/>   */}
-                <Pagination current={} total={} onNextClick={() => this.onNextClick()} onPrevClick={} />
-                <CardListContainer results={this.state.results} />
-            </React.Fragment>
                 <ul>
                     {items.map(item => (
                 <li key={item.title}>        
