@@ -4,10 +4,10 @@ function Pagination (props) {
   const {lastPage, current, prevClick, nextClick} = props;
 
   return (
-    <div>
-      <span onClick={prevClick}> prev </span>
+    <div className="pagination-wrapper">
+      <span onClick={prevClick} className="pagination-btn"> prev </span>
       <span> {current}...{lastPage} </span>
-      <span onClick={nextClick}> next </span>
+      <span onClick={nextClick} className="pagination-btn"> next </span>
     </div>
   )
 }

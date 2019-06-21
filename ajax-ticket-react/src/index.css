@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pagination-wrapper {
+  margin: 15px auto;
+}
+.pagination-btn {
+  padding: 5px;
+  border: solid 1px lightseagreen;
+  margin: 0 5px;
+
+}
+.pagination-btn:hover {
+  cursor: pointer;
+  color: lightskyblue;
+}
+.movie-list-wrapper {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+}
+.movie-list-wrapper > div {
+  margin: 10px;
+}
+
