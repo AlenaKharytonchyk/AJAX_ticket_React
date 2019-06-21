@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+// import CardMedia from '@material-ui/core/CardMedia';
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -23,11 +23,12 @@ export default function MediaCard(props) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia
+        {/* <CardMedia
           className={classes.media}
           image={item.poster_path}
           title={item.title}
-        />
+        /> */}
+        <img className="content-image" src={item.poster_path} title={item.title} alt={item.title}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
           {item.title}

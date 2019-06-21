@@ -21,13 +21,12 @@ code {
 }
 .pagination-btn {
   padding: 5px;
-  border: solid 1px lightseagreen;
   margin: 0 5px;
-
 }
 .pagination-btn:hover {
   cursor: pointer;
-  color: lightskyblue;
+  color: white;
+  background-color: dimgray;
 }
 .movie-list-wrapper {
   display: flex;
@@ -36,4 +35,9 @@ code {
 }
 .movie-list-wrapper > div {
   margin: 10px;
+}
+.content-image{
+display: flex;
+margin: auto;
+height: 500px;
 }
