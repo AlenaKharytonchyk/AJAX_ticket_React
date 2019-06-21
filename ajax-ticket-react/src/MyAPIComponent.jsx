@@ -27,8 +27,8 @@ class MyAPIComponent extends Component {
             this.pageUpdate(offset, search);
         }
     }
-    pageUpdate(offset, search) {
-        fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=${search}&offset=${offset}`)
+    pageUpdate(offset, movieSearch) {
+        fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=&search=${movieSearch || ''}&offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -45,6 +45,7 @@ class MyAPIComponent extends Component {
                 error,
             });
         });
+        console.log(movieSearch);
     }
 
     render() {
@@ -65,6 +66,16 @@ class MyAPIComponent extends Component {
                 })
             }
         }
+        const movieSearch = (e) => {
+              console.log(e.target);
+            if (e.target && e.target.matches('input#movie-search')) {
+                 this.setState({
+                    movieSearch: this.movieSearch,
+                })
+              }
+              console.log(e.target.matches('input#movie-search'));
+
+        }
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -73,6 +84,7 @@ class MyAPIComponent extends Component {
             return (
                 <React.Fragment>
                 <Pagination current={current} lastPage={lastPage} nextClick={nextClick} prevClick={prevClick}/>
+                <Search movieSearch={movieSearch}/>
                 <CardList items = {items}/>
                 </React.Fragment>
                 );
