@@ -37,7 +37,18 @@ code {
   margin: 10px;
 }
 .content-image{
-display: flex;
-margin: auto;
-height: 500px;
+  display: flex;
+  margin: auto;
+  height: 500px;
+}
+.search-wrapper {
+  display: flex;
+  margin: 0 auto 15px;
+}
+.search-field {
+  display: flex;
+}
+.search-btn {
+  background-color: lightgray;
+  border: none;
 }

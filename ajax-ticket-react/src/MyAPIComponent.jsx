@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardList from "./CardList";
 import Pagination from "./Pagination";
+import Search from "./Search";
 
 class MyAPIComponent extends Component {
     constructor(props) {
