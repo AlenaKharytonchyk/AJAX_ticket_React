@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import CardList from "./CardList";
+import Pagination from "./Pagination";
 
 class MyAPIComponent extends Component {
     constructor(props) {
@@ -16,7 +18,15 @@ class MyAPIComponent extends Component {
         };
     }
     componentDidMount() {
-        const { offset, limit, total, search} = this.state;
+        this.pageUpdate();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        const { offset, search } = this.state;
+        if (offset !== prevState.offset) {
+            this.pageUpdate(offset, search);
+        }
+    }
+    pageUpdate(offset, search) {
         fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=${search}&offset=${offset}`)
         .then(response => response.json())
         .then(data => {
@@ -36,54 +46,35 @@ class MyAPIComponent extends Component {
         });
     }
 
-    onNextClick() {
-        const { current, offset, total } = this.state;
-        
-        if(current + offset <= total)
-            this.setState({ current: current + offset});
-    }
-    onPrevClick() {
-        const { current, offset, total } = this.state;
-        if(current + offset > total)
-            this.setState({ current: current - offset});
-    }
-
-    onSearchInputChange(e) {
-        const { target } = e;
-
-        this.setState({search: target.value }) 
-    }
-
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, items, total, limit, offset } = this.state;
+        const current = offset/limit + 1;
+        const lastPage = Math.ceil(total/limit);
+        const prevClick = () => {
+            if (offset) {
+                this.setState({
+                    offset: offset-limit,
+                })
+            }
+        }
+        const nextClick = () => {
+            if (current < lastPage) {
+                this.setState({
+                    offset: offset + limit,
+                })
+            }
+        }
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
             return (
-                <ul>
-                    {items.map(item => (
-                <li key={item.title}>        
-                    <div className="media">     
-                        <img src={item.poster_path} alt={item.title}/>
-                        <span className="vote"> {item.vote_average}</span> 
-                    </div>
-                    <div className="content">
-                        <h1>{item.title}</h1>
-                        <ul>
-                        <li className="genres"><span>genres:</span>{item.genres}</li>
-                        <li className="tagline"><span>tagline:</span>{item.tagline}</li>
-                        <li className="release"><span>release date:</span>{item.release_date}</li>
-                        <li className="runtime"><span>runtime:</span>{item.runtime}</li>
-                        <li className="overview"><span>storyline:</span>{item.overview}</li>
-                        <li className="budget"><span>budget:</span>$ {item.budget}</li>
-                        </ul>
-                    </div>      
-                </li>
-                    ))}
-                </ul>
-            );
+                <React.Fragment>
+                <Pagination current={current} lastPage={lastPage} nextClick={nextClick} prevClick={prevClick}/>
+                <CardList items = {items}/>
+                </React.Fragment>
+                );
         }
     }
 }
