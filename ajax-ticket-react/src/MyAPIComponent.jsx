@@ -12,23 +12,24 @@ class MyAPIComponent extends Component {
             isLoaded: false,
             error: null,
             movieSearch: null,
-            search: 'title',
+            searchBy: 'title',
             offset: 0,
             limit: 0, 
             total: 0,
         };
     }
     componentDidMount() {
-        this.pageUpdate();
+        const { offset, movieSearch, searchBy } = this.state;
+        this.pageUpdate(offset, movieSearch, searchBy);
     }
     componentDidUpdate(prevProps, prevState) {
-        const { offset, search } = this.state;
-        if (offset !== prevState.offset) {
-            this.pageUpdate(offset, search);
+        const { offset, movieSearch, searchBy } = this.state;
+        if (offset !== prevState.offset || movieSearch !== prevState.movieSearch || searchBy !== prevState.searchBy) {
+            this.pageUpdate(offset, movieSearch, searchBy);
         }
     }
-    pageUpdate(offset, movieSearch) {
-        fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=&search=${movieSearch || ''}&offset=${offset}`)
+    pageUpdate(offset, movieSearch, searchBy) {
+        fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=${searchBy || ''}&search=${movieSearch || ''}&offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -45,7 +46,6 @@ class MyAPIComponent extends Component {
                 error,
             });
         });
-        console.log(movieSearch);
     }
 
     render() {
@@ -68,13 +68,13 @@ class MyAPIComponent extends Component {
         }
         const movieSearch = (e) => {
               console.log(e.target);
-            if (e.target && e.target.matches('input#movie-search')) {
+            if (e.target) {
                  this.setState({
-                    movieSearch: this.movieSearch,
+                    searchBy: e.target[0].value,
+                    movieSearch: e.target[1].value,
                 })
               }
               console.log(e.target.matches('input#movie-search'));
-
         }
         if (error) {
             return <div>Error: {error.message}</div>;
