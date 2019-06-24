@@ -47,7 +47,7 @@ class MyAPIComponent extends Component {
             });
         });
     }
-
+    
     render() {
         const { error, isLoaded, items, total, limit, offset } = this.state;
         const current = offset/limit + 1;
@@ -75,6 +75,7 @@ class MyAPIComponent extends Component {
                 })
               }
               console.log(e.target.matches('input#movie-search'));
+              e.preventDefault();
         }
         if (error) {
             return <div>Error: {error.message}</div>;
