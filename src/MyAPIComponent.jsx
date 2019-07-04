@@ -29,7 +29,7 @@ class MyAPIComponent extends Component {
         }
     }
     pageUpdate(offset, movieSearch, searchBy) {
-        fetch(`http://react-cdp-api.herokuapp.com/movies?searchBy=${searchBy || ''}&search=${movieSearch || ''}&offset=${offset}`)
+        fetch(`https://react-cdp-api.herokuapp.com/movies?searchBy=${searchBy || ''}&search=${movieSearch || ''}&offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             this.setState({
