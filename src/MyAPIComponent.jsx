@@ -72,6 +72,7 @@ class MyAPIComponent extends Component {
                  this.setState({
                     searchBy: e.target[0].value,
                     movieSearch: e.target[1].value,
+                    offset: 0
                 })
               }
               console.log(e.target.matches('input#movie-search'));
