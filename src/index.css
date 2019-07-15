@@ -47,6 +47,7 @@ code {
 }
 .search-field {
   display: flex;
+  height: 2em;
 }
 .search-btn {
   background-color: lightgray;
@@ -61,4 +62,13 @@ code {
 }
 select, input, button {
   outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+@media (max-width: 790px){
+  select {
+    display: none;
+
+  }
 }
