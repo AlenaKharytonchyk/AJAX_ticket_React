@@ -51,4 +51,14 @@ code {
 .search-btn {
   background-color: lightgray;
   border: none;
+  cursor: pointer;
+}
+.search-btn:hover {
+  background-color: darkgray;
+}
+.MuiButtonBase-root {
+  cursor: default !important;
+}
+select, input, button {
+  outline: none;
 }
